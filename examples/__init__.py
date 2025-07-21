@@ -11,12 +11,12 @@ Available Examples:
 
 Usage:
     You can run examples directly:
-    
+
     >>> python examples/basic_usage.py
     >>> python examples/run_automl.py
-    
+
     Or import functions from examples:
-    
+
     >>> from examples.run_automl import run_automl
     >>> from examples.basic_usage import example_with_synthetic_data
 """
@@ -26,19 +26,22 @@ try:
     from .basic_usage import (
         example_with_synthetic_data,
         example_with_wine_dataset,
-        example_with_overfitting_analysis
+        example_with_overfitting_analysis,
     )
-    
+
     __all__ = [
-        'run_automl',
-        'example_with_synthetic_data', 
-        'example_with_wine_dataset',
-        'example_with_overfitting_analysis'
+        "run_automl",
+        "example_with_synthetic_data",
+        "example_with_wine_dataset",
+        "example_with_overfitting_analysis",
     ]
-    
+
 except ImportError as e:
     import warnings
-    warnings.warn(f"Some example functions may not be available due to missing dependencies: {e}")
+
+    warnings.warn(
+        f"Some example functions may not be available due to missing dependencies: {e}"
+    )
     __all__ = []
 
 __version__ = "0.1.0"

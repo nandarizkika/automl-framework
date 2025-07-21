@@ -18,10 +18,10 @@ Test Structure:
 Usage:
     Run all tests:
     >>> pytest tests/
-    
+
     Run specific test file:
     >>> pytest tests/test_automl.py
-    
+
     Run with coverage:
     >>> pytest tests/ --cov=automl --cov-report=html
 """

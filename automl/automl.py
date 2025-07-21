@@ -26,14 +26,14 @@ class AutoML:
                 - custom_models: Dictionary of custom models to register
         """
         config = config or {}
-        problem_type = config.get('problem_type', 'classification')
-        random_state = config.get('random_state', 42)
+        problem_type = config.get("problem_type", "classification")
+        random_state = config.get("random_state", 42)
 
         self.pipeline = AutoMLPipeline(
             problem_type=problem_type, random_state=random_state
         )
 
-        custom_models = config.get('custom_models', {})
+        custom_models = config.get("custom_models", {})
         for name, model in custom_models.items():
             self.pipeline.register_model(name, model)
 
