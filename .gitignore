@@ -1,0 +1,74 @@
+# Python Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+*.egg
+
+# Virtual Environments
+venv/
+env/
+.env/
+.venv/
+ENV/
+
+# IDE-specific files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Logs and Databases
+*.log
+*.sqlite3
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# Coverage reports
+.coverage
+htmlcov/
+coverage.xml
+
+# Pytest
+.pytest_cache/
+
+# Mypy
+.mypy_cache/
+
+# Build and Distribution
+*.tar.gz
+*.whl
+
+# Temporary files
+*.swp
+*~
+
+# Sensitive Information (add any sensitive files/patterns)
+.env
+*.secret
+
+# Specific to AutoML Framework
+*.pkl  # Model files
+*.joblib  # Joblib serialized models
+
+# Documentation build outputs
+docs/_build/
+
+# Temporary project files
+.tmp/
+temp/
+
+# Project-specific exclusions
+project_structure.txt
+
+# Local development configurations
+local_config.py
