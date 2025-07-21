@@ -375,10 +375,10 @@ class AutoMLPipeline:
                         )
 
                         try:
-                            fit_evaluation[
-                                "improvement_suggestions"
-                            ] = self.model_evaluator.get_improvement_suggestions(
-                                fit_evaluation
+                            fit_evaluation["improvement_suggestions"] = (
+                                self.model_evaluator.get_improvement_suggestions(
+                                    fit_evaluation
+                                )
                             )
                         except Exception as e:
                             logger.error(
@@ -836,9 +836,7 @@ class AutoMLPipeline:
             sort_by = (
                 "test_f1"
                 if "test_f1" in df.columns
-                else "f1_score"
-                if "f1_score" in df.columns
-                else "test_accuracy"
+                else "f1_score" if "f1_score" in df.columns else "test_accuracy"
             )
 
         else:
