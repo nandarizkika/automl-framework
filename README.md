@@ -5,7 +5,6 @@
 [![PyPI version](https://img.shields.io/badge/pypi-v0.1.0-blue)](https://pypi.org/project/automl-framework/)
 [![Build Status](https://img.shields.io/github/actions/workflow/status/nandarizkika/automl-framework/ci.yml)](https://github.com/nandarizkika/automl-framework/actions)
 [![Coverage](https://img.shields.io/codecov/c/github/nandarizkika/automl-framework)](https://codecov.io/gh/nandarizkika/automl-framework)
-[![Downloads](https://img.shields.io/pypi/dm/automl-framework)](https://pypi.org/project/automl-framework/)
 
 ## 🌟 Project Overview
 
