@@ -7,7 +7,7 @@ The Metrics Calculator provides comprehensive performance evaluation capabilitie
 ```python
 class MetricsCalculator:
     def __init__(
-        self, 
+        self,
         problem_type: str = 'classification'
     )
 ```
@@ -32,8 +32,8 @@ Calculate performance metrics based on problem type.
 **Example:**
 ```python
 metrics = metrics_calculator.calculate_metrics(
-    y_true, 
-    y_pred, 
+    y_true,
+    y_pred,
     y_pred_proba
 )
 ```
@@ -84,7 +84,7 @@ class MetricsCalculator:
     def get_classification_report(self, y_true, y_pred):
         """
         Generate comprehensive classification report
-        
+
         Returns:
             Detailed text report of model performance
         """
@@ -105,8 +105,8 @@ print(report)
 ```python
 # Handles both binary and multiclass problems
 metrics = metrics_calculator.calculate_metrics(
-    y_true_multiclass, 
-    y_pred_multiclass, 
+    y_true_multiclass,
+    y_pred_multiclass,
     y_pred_proba_multiclass
 )
 ```
@@ -118,7 +118,7 @@ metrics = metrics_calculator.calculate_metrics(
 def plot_classification_metrics(y_true, y_pred, y_pred_proba):
     """
     Visualize classification performance metrics
-    
+
     Creates:
     - Confusion Matrix
     - ROC Curve
@@ -129,7 +129,7 @@ def plot_classification_metrics(y_true, y_pred, y_pred_proba):
 def plot_regression_metrics(y_true, y_pred):
     """
     Visualize regression performance metrics
-    
+
     Creates:
     - Actual vs Predicted Plot
     - Residual Plot
@@ -150,7 +150,7 @@ def plot_regression_metrics(y_true, y_pred):
 def robust_metric_calculation(y_true, y_pred, y_pred_proba=None):
     """
     Robust metric calculation with comprehensive error handling
-    
+
     Handles:
     - Different array types
     - Partial predictions

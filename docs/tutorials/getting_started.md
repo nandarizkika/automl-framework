@@ -33,7 +33,7 @@ X, y = load_iris(return_X_y=True)
 
 # Split data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, 
+    X, y,
     test_size=0.2,  # 20% for testing
     random_state=42  # Reproducibility
 )

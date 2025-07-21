@@ -17,7 +17,7 @@ Overfitting occurs when a machine learning model learns the training data too cl
 def detect_overfitting(train_metrics, test_metrics):
     # Compare training and test performance
     accuracy_gap = train_metrics['accuracy'] - test_metrics['accuracy']
-    
+
     if accuracy_gap > 0.1:  # 10% gap indicates potential overfitting
         return "Overfitting Detected"
     return "Model Generalizes Well"
@@ -68,7 +68,7 @@ from sklearn.feature_selection import SelectFromModel
 def select_important_features(model, X, y):
     selector = SelectFromModel(model, prefit=False)
     selector.fit(X, y)
-    
+
     # Get selected feature indices
     selected_feature_indices = selector.get_support(indices=True)
     return X[:, selected_feature_indices]
@@ -92,15 +92,15 @@ early_stopping_model = MLPClassifier(
 class OverfittingDetector:
     def __init__(self, problem_type='classification'):
         self.problem_type = problem_type
-    
+
     def assess_overfitting(self, train_metrics, test_metrics):
         """
         Comprehensive overfitting assessment
-        
+
         Args:
             train_metrics: Performance metrics on training data
             test_metrics: Performance metrics on test data
-        
+
         Returns:
             Dict with overfitting analysis
         """
@@ -111,7 +111,7 @@ class OverfittingDetector:
                 'test': test_metrics
             }
         }
-        
+
         # Classify overfitting severity
         if assessment['accuracy_gap'] > 0.2:
             assessment['severity'] = 'Severe Overfitting'
@@ -121,7 +121,7 @@ class OverfittingDetector:
             assessment['severity'] = 'Mild Overfitting'
         else:
             assessment['severity'] = 'No Significant Overfitting'
-        
+
         return assessment
 ```
 
@@ -131,13 +131,13 @@ class OverfittingDetector:
 ```python
 def compare_classification_metrics(y_true, y_train_pred, y_test_pred):
     from sklearn.metrics import accuracy_score, f1_score
-    
+
     train_accuracy = accuracy_score(y_true, y_train_pred)
     test_accuracy = accuracy_score(y_true, y_test_pred)
-    
+
     train_f1 = f1_score(y_true, y_train_pred, average='weighted')
     test_f1 = f1_score(y_true, y_test_pred, average='weighted')
-    
+
     return {
         'train_accuracy': train_accuracy,
         'test_accuracy': test_accuracy,
@@ -152,13 +152,13 @@ def compare_classification_metrics(y_true, y_train_pred, y_test_pred):
 ```python
 def compare_regression_metrics(y_true, y_train_pred, y_test_pred):
     from sklearn.metrics import mean_squared_error, r2_score
-    
+
     train_mse = mean_squared_error(y_true, y_train_pred)
     test_mse = mean_squared_error(y_true, y_test_pred)
-    
+
     train_r2 = r2_score(y_true, y_train_pred)
     test_r2 = r2_score(y_true, y_test_pred)
-    
+
     return {
         'train_mse': train_mse,
         'test_mse': test_mse,

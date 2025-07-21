@@ -7,7 +7,7 @@ The Hyperparameter Tuner provides advanced optimization strategies for finding o
 ```python
 class HyperparameterTuner:
     def __init__(
-        self, 
+        self,
         problem_type: str = 'classification',
         cv: int = 5,
         random_state: int = 42,
@@ -41,9 +41,9 @@ Perform hyperparameter tuning for a specific model.
 **Example:**
 ```python
 results = tuner.tune_model(
-    'RandomForest', 
+    'RandomForest',
     RandomForestClassifier(),
-    X_train, 
+    X_train,
     y_train
 )
 ```
@@ -131,7 +131,7 @@ tuner = HyperparameterTuner(
 results = tuner.tune_model(
     'RandomForest',
     RandomForestClassifier(),
-    X_train, 
+    X_train,
     y_train,
     search_type='bayesian',  # 'grid', 'random', 'bayesian', 'hyperopt'
     n_iter=50  # Number of iterations for random/bayesian search
@@ -159,8 +159,8 @@ Visualize hyperparameter tuning results.
 **Example:**
 ```python
 tuner.plot_tuning_results(
-    'RandomForest', 
-    'n_estimators', 
+    'RandomForest',
+    'n_estimators',
     'max_depth'
 )
 ```
@@ -216,7 +216,7 @@ Load previously saved tuning results.
 **Example:**
 ```python
 loaded_results = tuner.load_tuning_results(
-    'tuning_output/', 
+    'tuning_output/',
     'RandomForest'
 )
 ```

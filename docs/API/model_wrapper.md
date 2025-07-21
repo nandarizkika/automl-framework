@@ -7,9 +7,9 @@ The Model Wrapper provides a standardized interface for machine learning models,
 ```python
 class ModelWrapper:
     def __init__(
-        self, 
-        name: str, 
-        model_instance: BaseEstimator, 
+        self,
+        name: str,
+        model_instance: BaseEstimator,
         preprocessor: Optional[Preprocessor] = None
     )
 ```

@@ -13,12 +13,12 @@ automl = AutoML(problem_type='classification')
 
 # Register custom models
 automl.register_model(
-    'ExtraTrees', 
+    'ExtraTrees',
     ExtraTreesClassifier(n_estimators=200)
 )
 
 automl.register_model(
-    'CustomSVM', 
+    'CustomSVM',
     SVC(kernel='rbf', probability=True)
 )
 
@@ -36,7 +36,7 @@ custom_preprocessor = StandardPreprocessor()
 
 # Register model with custom preprocessor
 automl.register_model(
-    'RobustModel', 
+    'RobustModel',
     RandomForestClassifier(n_estimators=150),
     preprocessor=custom_preprocessor
 )
@@ -50,24 +50,24 @@ import numpy as np
 class MyCustomClassifier(BaseEstimator, ClassifierMixin):
     def __init__(self, threshold=0.5):
         self.threshold = threshold
-    
+
     def fit(self, X, y):
         # Custom training logic
         self.classes_ = np.unique(y)
         return self
-    
+
     def predict(self, X):
         # Custom prediction logic
         probas = self._predict_proba(X)
         return np.where(probas > self.threshold, 1, 0)
-    
+
     def predict_proba(self, X):
         # Implement probabilistic predictions
         return np.random.random(size=(X.shape[0], 2))
 
 # Register custom model
 automl.register_model(
-    'MyCustomClassifier', 
+    'MyCustomClassifier',
     MyCustomClassifier(threshold=0.6)
 )
 ```

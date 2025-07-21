@@ -44,13 +44,13 @@ def predict():
     try:
         # Get input data
         data = request.json['features']
-        
+
         # Convert to numpy array
         input_data = np.array(data).reshape(1, -1)
-        
+
         # Make prediction
         prediction = model.predict(input_data)
-        
+
         return jsonify({
             'prediction': prediction.tolist(),
             'success': True
@@ -96,17 +96,17 @@ def monitor_model_performance(model, X_test, y_test):
     """
     # Make predictions
     predictions = model.predict(X_test)
-    
+
     # Calculate performance metrics
     performance = {
         'accuracy': accuracy_score(y_test, predictions),
         'f1_score': f1_score(y_test, predictions, average='weighted'),
         'timestamp': datetime.now()
     }
-    
+
     # Log performance
     log_model_performance(performance)
-    
+
     return performance
 ```
 

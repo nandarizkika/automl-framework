@@ -935,7 +935,7 @@ class HyperparameterTuner:
                         params_df[param] = pd.to_numeric(
                             params_df[param], errors="raise"
                         )
-                    except:
+                    except Exception:
                         continue
 
                 correlation = np.corrcoef(params_df[param], scores)[0, 1]

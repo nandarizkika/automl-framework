@@ -7,8 +7,8 @@ The AutoML Pipeline is the core engine of the framework, managing the entire mac
 ```python
 class AutoMLPipeline:
     def __init__(
-        self, 
-        problem_type: str = 'classification', 
+        self,
+        problem_type: str = 'classification',
         random_state: int = 42
     )
 ```
@@ -81,7 +81,7 @@ Register a custom model with the pipeline.
 from sklearn.ensemble import ExtraTreesClassifier
 
 pipeline.register_model(
-    'ExtraTrees', 
+    'ExtraTrees',
     ExtraTreesClassifier(n_estimators=200)
 )
 ```

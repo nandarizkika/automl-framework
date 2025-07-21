@@ -48,7 +48,7 @@ tuning_results = tuner.tune_models(
 
 # Visualize tuning results
 tuner.plot_comparison(
-    X_train, y_train, 
+    X_train, y_train,
     X_test, y_test
 )
 ```
@@ -88,13 +88,13 @@ custom_preprocessor = StandardPreprocessor()
 
 # Register multiple custom models
 automl.register_model(
-    'ExtraTrees', 
+    'ExtraTrees',
     ExtraTreesClassifier(n_estimators=200),
     preprocessor=custom_preprocessor
 )
 
 automl.register_model(
-    'CustomSVM', 
+    'CustomSVM',
     SVC(kernel='rbf', probability=True),
     preprocessor=custom_preprocessor
 )
@@ -106,8 +106,8 @@ automl.register_model(
 ```python
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import (
-    StandardScaler, 
-    OneHotEncoder, 
+    StandardScaler,
+    OneHotEncoder,
     PolynomialFeatures
 )
 
@@ -115,7 +115,7 @@ class AdvancedPreprocessor:
     def __init__(self, numeric_features, categorical_features):
         """
         Create a comprehensive preprocessing pipeline
-        
+
         Args:
             numeric_features: List of numeric column names
             categorical_features: List of categorical column names
@@ -127,23 +127,23 @@ class AdvancedPreprocessor:
                     ('scaler', StandardScaler()),
                     ('poly', PolynomialFeatures(degree=2, include_bias=False))
                 ]), numeric_features),
-                
+
                 # Categorical features: One-hot encoding
                 ('cat', OneHotEncoder(
                     handle_unknown='ignore',
                     sparse=False
                 ), categorical_features)
             ])
-    
+
     def fit_transform(self, X, y=None):
         return self.preprocessor.fit_transform(X)
-    
+
     def transform(self, X):
         return self.preprocessor.transform(X)
 
 # Use in model registration
 automl.register_model(
-    'AdvancedModel', 
+    'AdvancedModel',
     RandomForestClassifier(),
     preprocessor=AdvancedPreprocessor(
         numeric_features=['feature1', 'feature2'],
@@ -184,13 +184,13 @@ stacking_ensemble = StackingClassifier(
 
 # Register ensemble models
 automl.register_model(
-    'VotingEnsemble', 
+    'VotingEnsemble',
     voting_ensemble,
     preprocessor=StandardPreprocessor()
 )
 
 automl.register_model(
-    'StackingEnsemble', 
+    'StackingEnsemble',
     stacking_ensemble,
     preprocessor=StandardPreprocessor()
 )

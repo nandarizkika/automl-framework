@@ -12,7 +12,7 @@ class DataUtils:
     def train_test_split(X, y, test_size=0.2, random_state=42):
         """Split data into train and test sets"""
         pass
-    
+
     @staticmethod
     def check_data_quality(X, y):
         """Analyze data quality and characteristics"""
@@ -37,8 +37,8 @@ Split data into training and testing sets.
 from automl.utils import DataUtils
 
 X_train, X_test, y_train, y_test = DataUtils.train_test_split(
-    X, y, 
-    test_size=0.2, 
+    X, y,
+    test_size=0.2,
     random_state=42
 )
 ```
@@ -99,19 +99,19 @@ import pandas as pd
 def advanced_data_preprocessing(X, y):
     # Check data quality
     quality_report = DataUtils.check_data_quality(X, y)
-    
+
     # Handle missing values
     if quality_report['missing_values_X'] > 0:
         X = handle_missing_values(X)
-    
+
     # Remove zero variance features
     if quality_report['zero_variance_features']:
         X = remove_zero_variance_features(X, quality_report['zero_variance_features'])
-    
+
     # Handle class imbalance
     if quality_report['is_imbalanced']:
         X, y = balance_classes(X, y)
-    
+
     return X, y
 
 def handle_missing_values(X):
@@ -147,23 +147,23 @@ def performance_wrapper(func):
         # Start memory tracking
         tracemalloc.start()
         start_time = time.time()
-        
+
         # Execute function
         result = func(*args, **kwargs)
-        
+
         # Calculate performance metrics
         end_time = time.time()
         current, peak = tracemalloc.get_traced_memory()
-        
+
         # Stop tracking
         tracemalloc.stop()
-        
+
         # Log performance
         print(f"Function: {func.__name__}")
         print(f"Execution Time: {end_time - start_time:.4f} seconds")
         print(f"Memory Usage: {current / 10**6:.2f} MB")
         print(f"Peak Memory: {peak / 10**6:.2f} MB")
-        
+
         return result
     return wrapper
 ```
@@ -175,12 +175,12 @@ def performance_wrapper(func):
 def robust_execution(func, *args, **kwargs):
     """
     Execute a function with comprehensive error handling
-    
+
     Args:
         func: Function to execute
         *args: Positional arguments
         **kwargs: Keyword arguments
-    
+
     Returns:
         Tuple of (result, error)
     """

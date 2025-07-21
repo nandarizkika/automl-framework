@@ -4,13 +4,18 @@ Setup script for AutoML Framework
 from setuptools import setup, find_packages
 import os
 
+
 def read_readme():
     with open("README.md", "r", encoding="utf-8") as fh:
         return fh.read()
 
+
 def read_requirements():
     with open("requirements.txt", "r", encoding="utf-8") as fh:
-        return [line.strip() for line in fh if line.strip() and not line.startswith("#")]
+        return [
+            line.strip() for line in fh if line.strip() and not line.startswith("#")
+        ]
+
 
 def read_version():
     version_file = os.path.join("automl", "__version__.py")
@@ -19,6 +24,7 @@ def read_version():
             exec(f.read())
             return locals()["__version__"]
     return "0.1.0"
+
 
 setup(
     name="automl-framework",

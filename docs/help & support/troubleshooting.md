@@ -57,14 +57,14 @@ def handle_common_preprocessing_errors(X):
         print("1. Use imputation: SimpleImputer()")
         print("2. Drop rows with missing values")
         print("3. Fill with mean/median")
-    
+
     # Check for infinite values
     if np.isinf(X).any():
         print("⚠️ Infinite values detected!")
         print("Solutions:")
         print("1. Replace with large finite number")
         print("2. Use RobustScaler()")
-    
+
     # Check data types
     if not np.issubdtype(X.dtype, np.number):
         print("⚠️ Non-numeric data detected!")
@@ -116,7 +116,7 @@ def diagnose_training_errors():
             ]
         }
     }
-    
+
     return common_errors
 ```
 
@@ -127,10 +127,10 @@ def diagnose_training_errors():
 def advanced_error_diagnosis(error):
     """
     Advanced error diagnosis and recommendation system
-    
+
     Args:
         error: Exception or error message
-    
+
     Returns:
         Detailed diagnostic information
     """
@@ -157,10 +157,10 @@ def advanced_error_diagnosis(error):
             ]
         }
     }
-    
+
     # Analyze error type
     error_type = type(error).__name__
-    
+
     # Provide specific recommendations
     recommendations = error_database.get(error_type, {
         "general_advice": [
@@ -169,7 +169,7 @@ def advanced_error_diagnosis(error):
             "Consult documentation"
         ]
     })
-    
+
     return {
         "error_type": error_type,
         "error_message": str(error),
@@ -186,17 +186,17 @@ def advanced_error_diagnosis(error):
        checks = [
            # Check for missing values
            np.isnan(X).sum() == 0,
-           
+
            # Check for infinite values
            not np.isinf(X).any(),
-           
+
            # Check data types
            np.issubdtype(X.dtype, np.number),
-           
+
            # Check target variable
            len(np.unique(y)) > 1
        ]
-       
+
        if not all(checks):
            raise ValueError("Dataset does not meet requirements")
    ```
@@ -212,7 +212,7 @@ def advanced_error_diagnosis(error):
            format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
            filename='automl.log'
        )
-       
+
        # Add file handler for detailed logs
        file_handler = logging.FileHandler('detailed_debug.log')
        file_handler.setLevel(logging.DEBUG)

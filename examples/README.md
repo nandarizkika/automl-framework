@@ -170,7 +170,7 @@ class CustomPreprocessor(Preprocessor):
     def fit(self, X, y=None):
         # Your preprocessing logic
         return self
-    
+
     def transform(self, X):
         # Your transformation logic
         return X
@@ -287,7 +287,7 @@ This example demonstrates [specific feature/use case].
 
 Usage:
     python your_example.py
-    
+
 Requirements:
     - List any special requirements
     - Specific datasets needed
@@ -297,13 +297,13 @@ Requirements:
 def main():
     """Main example function with clear steps"""
     print("=== [Example Name] ===")
-    
+
     # Step 1: Data preparation
     # Step 2: AutoML setup
     # Step 3: Training
     # Step 4: Evaluation
     # Step 5: Results analysis
-    
+
     print("Example completed successfully!")
 
 if __name__ == "__main__":

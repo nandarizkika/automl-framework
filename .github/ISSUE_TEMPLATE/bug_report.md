@@ -22,9 +22,9 @@ What did you expect to happen?
 What actually happened?
 
 ## 🖥️ Environment Details
-- AutoML Framework Version: 
-- Python Version: 
-- Operating System: 
+- AutoML Framework Version:
+- Python Version:
+- Operating System:
 - Installation Method (PyPI/GitHub/Local):
 
 ## 📋 Additional Context

@@ -575,12 +575,12 @@ def production_deployment_preparation(automl, output_dir="production_models"):
             if __name__ == "__main__":
                 # Load model
                 model = load_model()
-                
+
                 # Example prediction (replace with your data)
                 # X_new = pd.read_csv('new_data.csv')
                 # predictions = predict(model, X_new)
                 # print(f"Predictions: {{predictions}}")
-                
+
                 print("Model loaded successfully and ready for deployment!")
         """
 

@@ -40,28 +40,28 @@ import pandas as pd
 def handle_missing_values(X):
     """
     Strategies for handling missing data
-    
+
     Args:
         X: Input data with missing values
-    
+
     Returns:
         Processed data with handled missing values
     """
     # Simple imputation strategies
-    
+
     # Mean/Median Imputation
     X_mean_imputed = np.nan_to_num(X, nan=np.nanmean(X))
-    
+
     # Pandas DataFrame Handling
     if isinstance(X, pd.DataFrame):
         # Fill numeric columns with median
         X_numeric = X.select_dtypes(include=[np.number])
         X_numeric.fillna(X_numeric.median(), inplace=True)
-        
+
         # Fill categorical columns with mode
         X_categorical = X.select_dtypes(exclude=[np.number])
         X_categorical.fillna(X_categorical.mode().iloc[0], inplace=True)
-    
+
     return X_mean_imputed
 ```
 
@@ -89,17 +89,17 @@ from sklearn.preprocessing import PolynomialFeatures
 def create_interaction_features(X):
     """
     Generate polynomial and interaction features
-    
+
     Args:
         X: Original feature matrix
-    
+
     Returns:
         Expanded feature matrix with interactions
     """
     # Create polynomial features
     poly = PolynomialFeatures(degree=2, include_bias=False)
     X_poly = poly.fit_transform(X)
-    
+
     return X_poly
 ```
 
@@ -114,34 +114,34 @@ class BasePreprocessor(ABC):
     def fit(self, X, y=None):
         """
         Learn preprocessing parameters from data
-        
+
         Args:
             X: Input features
             y: Optional target variable
         """
         pass
-    
+
     @abstractmethod
     def transform(self, X):
         """
         Apply preprocessing to input data
-        
+
         Args:
             X: Input features
-        
+
         Returns:
             Transformed features
         """
         pass
-    
+
     def fit_transform(self, X, y=None):
         """
         Fit preprocessor and transform in one step
-        
+
         Args:
             X: Input features
             y: Optional target variable
-        
+
         Returns:
             Transformed features
         """
@@ -154,41 +154,41 @@ class AdvancedPreprocessor(BasePreprocessor):
     def __init__(self, scaling=True, encoding=True):
         self.scaling = StandardScaler() if scaling else None
         self.encoding = OneHotEncoder(sparse=False) if encoding else None
-    
+
     def fit(self, X, y=None):
         # Separate numeric and categorical columns
         if isinstance(X, pd.DataFrame):
             numeric_cols = X.select_dtypes(include=[np.number]).columns
             categorical_cols = X.select_dtypes(exclude=[np.number]).columns
-            
+
             if self.scaling:
                 self.scaling.fit(X[numeric_cols])
-            
+
             if self.encoding:
                 self.encoding.fit(X[categorical_cols])
-        
+
         return self
-    
+
     def transform(self, X):
         if isinstance(X, pd.DataFrame):
             numeric_cols = X.select_dtypes(include=[np.number]).columns
             categorical_cols = X.select_dtypes(exclude=[np.number]).columns
-            
+
             # Transform numeric columns
             if self.scaling:
                 X[numeric_cols] = self.scaling.transform(X[numeric_cols])
-            
+
             # Transform categorical columns
             if self.encoding:
                 encoded_cats = self.encoding.transform(X[categorical_cols])
                 encoded_df = pd.DataFrame(
-                    encoded_cats, 
+                    encoded_cats,
                     columns=self.encoding.get_feature_names_out(categorical_cols)
                 )
                 X = pd.concat([X.drop(columns=categorical_cols), encoded_df], axis=1)
-            
+
             return X.values
-        
+
         return X
 ```
 
@@ -202,11 +202,11 @@ from sklearn.pipeline import Pipeline
 def create_preprocessing_pipeline(numeric_features, categorical_features):
     """
     Create a comprehensive preprocessing pipeline
-    
+
     Args:
         numeric_features: List of numeric column names
         categorical_features: List of categorical column names
-    
+
     Returns:
         Preprocessing pipeline
     """
@@ -215,7 +215,7 @@ def create_preprocessing_pipeline(numeric_features, categorical_features):
             ('num', StandardScaler(), numeric_features),
             ('cat', OneHotEncoder(handle_unknown='ignore'), categorical_features)
         ])
-    
+
     return preprocessor
 ```
 

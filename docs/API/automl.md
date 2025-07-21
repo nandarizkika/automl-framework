@@ -7,7 +7,7 @@ The `AutoML` class serves as the primary interface for automated machine learnin
 ```python
 class AutoML:
     def __init__(
-        self, 
+        self,
         config: Optional[Dict[str, Any]] = None
     )
 ```
@@ -93,7 +93,7 @@ Register a custom model with the framework.
 from sklearn.ensemble import ExtraTreesClassifier
 
 automl.register_model(
-    'ExtraTrees', 
+    'ExtraTrees',
     ExtraTreesClassifier(n_estimators=200)
 )
 ```

@@ -31,12 +31,12 @@ class BasePreprocessor(ABC):
     def fit(self, X, y=None):
         """Learn preprocessing parameters"""
         pass
-    
+
     @abstractmethod
     def transform(self, X):
         """Apply data transformation"""
         pass
-    
+
     def fit_transform(self, X, y=None):
         """Fit and transform in one step"""
         return self.fit(X, y).transform(X)
@@ -50,7 +50,7 @@ class SpecialScaler(BasePreprocessor):
     def __init__(self, columns=None, method='log'):
         """
         Custom scaling with multiple transformation options
-        
+
         Args:
             columns: Specific columns to transform
             method: Transformation method ('log', 'sqrt', 'boxcox')
@@ -58,7 +58,7 @@ class SpecialScaler(BasePreprocessor):
         self.columns = columns
         self.method = method
         self.fitted_params = {}
-    
+
     def fit(self, X, y=None):
         # Determine columns to transform
         if self.columns is None:
@@ -66,54 +66,54 @@ class SpecialScaler(BasePreprocessor):
                 self.columns = X.select_dtypes(include=[np.number]).columns
             else:
                 self.columns = range(X.shape[1])
-        
+
         # Learn transformation parameters
         for col in self.columns:
             column_data = X[:, col] if not isinstance(X, pd.DataFrame) else X[col]
-            
+
             if self.method == 'log':
                 # Handle non-positive values
                 min_val = np.min(column_data)
                 self.fitted_params[col] = min_val if min_val <= 0 else 0
-            
+
             elif self.method == 'sqrt':
                 self.fitted_params[col] = 0
-            
+
             elif self.method == 'boxcox':
                 from scipy import stats
                 # Shift data to make it positive
                 shifted_data = column_data + abs(np.min(column_data)) + 1
                 _, fitted_lambda = stats.boxcox(shifted_data)
                 self.fitted_params[col] = fitted_lambda
-        
+
         return self
-    
+
     def transform(self, X):
         # Create a copy to avoid modifying original data
         X_transformed = X.copy() if isinstance(X, pd.DataFrame) else X.copy()
-        
+
         for col in self.columns:
             column_data = X_transformed[:, col] if not isinstance(X_transformed, pd.DataFrame) else X_transformed[col]
-            
+
             if self.method == 'log':
                 column_data = np.log(column_data + abs(self.fitted_params[col]) + 1)
-            
+
             elif self.method == 'sqrt':
                 column_data = np.sqrt(column_data)
-            
+
             elif self.method == 'boxcox':
                 from scipy import stats
                 column_data = stats.boxcox(
-                    column_data + abs(np.min(column_data)) + 1, 
+                    column_data + abs(np.min(column_data)) + 1,
                     lmbda=self.fitted_params[col]
                 )
-            
+
             # Update transformed data
             if isinstance(X_transformed, pd.DataFrame):
                 X_transformed[col] = column_data
             else:
                 X_transformed[:, col] = column_data
-        
+
         return X_transformed
 ```
 
@@ -122,8 +122,8 @@ class SpecialScaler(BasePreprocessor):
 ### Comprehensive Data Transformation
 ```python
 from sklearn.preprocessing import (
-    StandardScaler, 
-    OneHotEncoder, 
+    StandardScaler,
+    OneHotEncoder,
     RobustScaler
 )
 from sklearn.compose import ColumnTransformer
@@ -132,14 +132,14 @@ from sklearn.impute import SimpleImputer
 
 class AdvancedPreprocessor(BasePreprocessor):
     def __init__(
-        self, 
-        numeric_features=None, 
-        categorical_features=None, 
+        self,
+        numeric_features=None,
+        categorical_features=None,
         impute_strategy='median'
     ):
         """
         Comprehensive data preprocessing pipeline
-        
+
         Args:
             numeric_features: List of numeric column names/indices
             categorical_features: List of categorical column names/indices
@@ -148,14 +148,14 @@ class AdvancedPreprocessor(BasePreprocessor):
         self.numeric_features = numeric_features
         self.categorical_features = categorical_features
         self.impute_strategy = impute_strategy
-        
+
         # Create preprocessing pipeline
         self.preprocessor = None
-    
+
     def _build_preprocessor(self, X):
         """
         Dynamically build preprocessing pipeline
-        
+
         Args:
             X: Input data to infer feature types
         """
@@ -168,60 +168,60 @@ class AdvancedPreprocessor(BasePreprocessor):
                 # Assume all features are numeric for numpy arrays
                 self.numeric_features = range(X.shape[1])
                 self.categorical_features = []
-        
+
         # Create preprocessing components
         numeric_transformer = Pipeline(steps=[
             ('imputer', SimpleImputer(strategy=self.impute_strategy)),
             ('scaler', RobustScaler())  # More robust to outliers
         ])
-        
+
         categorical_transformer = Pipeline(steps=[
             ('imputer', SimpleImputer(strategy='most_frequent')),
             ('onehot', OneHotEncoder(handle_unknown='ignore'))
         ])
-        
+
         # Combine transformers
         self.preprocessor = ColumnTransformer(
             transformers=[
                 ('num', numeric_transformer, self.numeric_features),
                 ('cat', categorical_transformer, self.categorical_features)
             ])
-        
+
         return self
-    
+
     def fit(self, X, y=None):
         """
         Learn preprocessing parameters
-        
+
         Args:
             X: Input features
             y: Optional target variable
-        
+
         Returns:
             Self
         """
         # Build preprocessor if not already created
         self._build_preprocessor(X)
-        
+
         # Fit the preprocessor
         self.preprocessor.fit(X)
-        
+
         return self
-    
+
     def transform(self, X):
         """
         Apply preprocessing to input data
-        
+
         Args:
             X: Input features
-        
+
         Returns:
             Transformed features
         """
         # Ensure preprocessor is created
         if self.preprocessor is None:
             self._build_preprocessor(X)
-        
+
         # Transform data
         return self.preprocessor.transform(X)
 
@@ -237,32 +237,32 @@ from automl import AutoML
 def create_sample_dataset():
     """Create a sample dataset with mixed feature types"""
     np.random.seed(42)
-    
+
     # Numeric features with different scales and distributions
     numeric_data = pd.DataFrame({
         'income': np.random.lognormal(mean=10, sigma=1, size=1000),
         'age': np.random.normal(40, 10, 1000),
         'experience': np.random.poisson(5, 1000)
     })
-    
+
     # Categorical features
     categorical_data = pd.DataFrame({
         'education': np.random.choice(
-            ['high_school', 'bachelors', 'masters', 'phd'], 
+            ['high_school', 'bachelors', 'masters', 'phd'],
             size=1000
         ),
         'industry': np.random.choice(
-            ['tech', 'finance', 'healthcare', 'education', 'other'], 
+            ['tech', 'finance', 'healthcare', 'education', 'other'],
             size=1000
         )
     })
-    
+
     # Combine datasets
     data = pd.concat([numeric_data, categorical_data], axis=1)
-    
+
     # Create target variable (example classification)
     data['high_income'] = (data['income'] > data['income'].median()).astype(int)
-    
+
     return data
 
 # Load and prepare dataset
@@ -284,7 +284,7 @@ advanced_preprocessor = AdvancedPreprocessor(
 )
 
 automl.register_model(
-    'ComplexDataModel', 
+    'ComplexDataModel',
     RandomForestClassifier(),
     preprocessor=advanced_preprocessor
 )
@@ -302,7 +302,7 @@ class MultiTransformPreprocessor(BasePreprocessor):
     def __init__(self, transformations=None):
         """
         Apply multiple transformations to different feature groups
-        
+
         Args:
             transformations: Dict mapping feature groups to transformation methods
         """
@@ -312,33 +312,33 @@ class MultiTransformPreprocessor(BasePreprocessor):
             'robust_scale': ['numeric_features']
         }
         self.transformation_objects = {}
-    
+
     def fit(self, X, y=None):
         # Apply different transformations to feature groups
         for transform_type, features in self.transformations.items():
             if transform_type == 'log':
                 self.transformation_objects['log'] = LogTransformer(features)
                 self.transformation_objects['log'].fit(X[features])
-            
+
             elif transform_type == 'sqrt':
                 self.transformation_objects['sqrt'] = SqrtTransformer(features)
                 self.transformation_objects['sqrt'].fit(X[features])
-            
+
             elif transform_type == 'robust_scale':
                 self.transformation_objects['robust_scale'] = RobustScaler()
                 self.transformation_objects['robust_scale'].fit(X[features])
-        
+
         return self
-    
+
     def transform(self, X):
         # Create a copy of input data
         X_transformed = X.copy()
-        
+
         # Apply transformations
         for transform_type, transformer in self.transformation_objects.items():
             features = self.transformations[transform_type]
             X_transformed[features] = transformer.transform(X[features])
-        
+
         return X_transformed
 
 # Custom transformation helpers
@@ -346,13 +346,13 @@ class LogTransformer:
     def __init__(self, columns):
         self.columns = columns
         self.min_values = {}
-    
+
     def fit(self, X):
         for col in self.columns:
             # Ensure log transformation works
             self.min_values[col] = max(0, -X[col].min() + 1)
         return self
-    
+
     def transform(self, X):
         X_transformed = X.copy()
         for col in self.columns:
@@ -362,10 +362,10 @@ class LogTransformer:
 class SqrtTransformer:
     def __init__(self, columns):
         self.columns = columns
-    
+
     def fit(self, X):
         return self
-    
+
     def transform(self, X):
         X_transformed = X.copy()
         for col in self.columns:

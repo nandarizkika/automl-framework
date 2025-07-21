@@ -78,11 +78,9 @@ class ModelEvaluator:
         try:
             y_train_proba = model.predict_proba(X_train)
             y_test_proba = model.predict_proba(X_test)
-            has_proba = True
-        except:
+        except Exception:
             y_train_proba = None
             y_test_proba = None
-            has_proba = False
 
         if self.problem_type == "classification":
             return self._evaluate_classification_fit(

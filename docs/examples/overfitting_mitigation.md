@@ -41,7 +41,7 @@ for suggestion in suggestions:
 
 # Manually apply a mitigation strategy
 result = automl.manually_mitigate_overfitting(
-    'RandomForest', 
+    'RandomForest',
     'Regularization'
 )
 ```
@@ -56,7 +56,7 @@ regularized_model = Ridge(alpha=1.0)
 
 # Register with custom preprocessing
 automl.register_model(
-    'RegularizedModel', 
+    'RegularizedModel',
     regularized_model,
     preprocessor=StandardScaler()
 )

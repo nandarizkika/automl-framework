@@ -149,7 +149,7 @@ from sklearn.ensemble import ExtraTreesClassifier
 # Register a custom model
 custom_model = ExtraTreesClassifier(n_estimators=200)
 automl.register_model(
-    'MyCustomModel', 
+    'MyCustomModel',
     custom_model,
     preprocessor=custom_preprocessor  # Optional
 )

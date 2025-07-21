@@ -347,8 +347,8 @@ class AutoMLPipeline:
                 y_pred_proba = None
                 try:
                     y_pred_proba = model.predict_proba(X)
-                except:
-                    pass
+                except Exception as e:
+                    logging.error(f"An error occurred: {e}")
 
                 metrics = self.metrics_calculator.calculate_metrics(
                     y, y_pred, y_pred_proba
@@ -356,7 +356,9 @@ class AutoMLPipeline:
 
                 if self.problem_type == "classification":
                     logger.info(
-                        f"\nClassification Report for {name}:\n{self.metrics_calculator.get_classification_report(y, y_pred)}"
+                        f"""\nClassification Report for {name}:\n{
+                            self.metrics_calculator.get_classification_report(y, y_pred)
+                            }"""
                     )
 
                 feature_importance = model.get_feature_importance()
@@ -373,10 +375,10 @@ class AutoMLPipeline:
                         )
 
                         try:
-                            fit_evaluation["improvement_suggestions"] = (
-                                self.model_evaluator.get_improvement_suggestions(
-                                    fit_evaluation
-                                )
+                            fit_evaluation[
+                                "improvement_suggestions"
+                            ] = self.model_evaluator.get_improvement_suggestions(
+                                fit_evaluation
                             )
                         except Exception as e:
                             logger.error(
@@ -469,13 +471,15 @@ class AutoMLPipeline:
                 self.best_model = self.mitigated_models[best_name]["model"]
                 self.best_model_name = f"{best_name}_mitigated"
                 logger.info(
-                    f"Best model: {self.best_model_name} with {metric_to_optimize}: {all_models[best_name].get(metric_to_optimize, 0):.4f}"
+                    f"""Best model: {self.best_model_name} with {metric_to_optimize}:
+                    {all_models[best_name].get(metric_to_optimize, 0):.4f}"""
                 )
             else:
                 self.best_model = self.results[best_name]["model"]
                 self.best_model_name = best_name
                 logger.info(
-                    f"Best model: {best_name} with {metric_to_optimize}: {self.results[best_name].get(metric_to_optimize, 0):.4f}"
+                    f"""Best model: {best_name} with {metric_to_optimize}:
+                    {self.results[best_name].get(metric_to_optimize, 0):.4f}"""
                 )
 
         return self.results
@@ -832,7 +836,9 @@ class AutoMLPipeline:
             sort_by = (
                 "test_f1"
                 if "test_f1" in df.columns
-                else "f1_score" if "f1_score" in df.columns else "test_accuracy"
+                else "f1_score"
+                if "f1_score" in df.columns
+                else "test_accuracy"
             )
 
         else:
@@ -1131,7 +1137,8 @@ class AutoMLPipeline:
             }
         else:
             logger.warning(
-                f"Failed to mitigate overfitting in {model_name} using {strategy_name}: {results.get('message', 'Unknown error')}"
+                f"""Failed to mitigate overfitting in {model_name} using {strategy_name}:
+                {results.get('message', 'Unknown error')}"""
             )
 
             return {

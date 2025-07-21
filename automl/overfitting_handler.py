@@ -545,8 +545,6 @@ class OverfittingHandler:
 
                 selector.fit(X_train, y_train)
 
-                selected_features = selector.get_support()
-
                 new_model = clone(model)
 
                 X_train_selected = selector.transform(X_train)
