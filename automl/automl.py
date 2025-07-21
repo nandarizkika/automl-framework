@@ -1,7 +1,9 @@
 """
-Main AutoML class for the AutoML framework.
+Main AutoML Class for the AutoML Framework.
+
 Provides a simple user interface for the entire AutoML system.
 """
+
 from typing import Dict, Optional, Any, List
 from sklearn.base import BaseEstimator
 
@@ -11,10 +13,11 @@ from .automl_pipeline import AutoMLPipeline
 
 class AutoML:
     """Main user interface for the AutoML system"""
+
     def __init__(self, config: Optional[Dict[str, Any]] = None):
         """
         Initialize the AutoML system
-        
+
         Args:
             config: Configuration dictionary with options:
                 - problem_type: 'classification' or 'regression'
@@ -25,9 +28,11 @@ class AutoML:
         config = config or {}
         problem_type = config.get('problem_type', 'classification')
         random_state = config.get('random_state', 42)
-        
-        self.pipeline = AutoMLPipeline(problem_type=problem_type, random_state=random_state)
-        
+
+        self.pipeline = AutoMLPipeline(
+            problem_type=problem_type, random_state=random_state
+        )
+
         custom_models = config.get('custom_models', {})
         for name, model in custom_models.items():
             self.pipeline.register_model(name, model)
