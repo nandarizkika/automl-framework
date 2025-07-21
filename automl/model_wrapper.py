@@ -5,6 +5,7 @@ Provides a standardized interface for all models.
 import logging
 import joblib
 import time
+import traceback
 from datetime import datetime
 from typing import Optional, Dict, Any, List
 from sklearn.base import BaseEstimator
