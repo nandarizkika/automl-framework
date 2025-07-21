@@ -1,11 +1,34 @@
 [flake8]
-max-line-length = 120
+# General settings
+max-line-length = 88
 exclude = 
     .git,
     __pycache__,
     build,
-    dist
+    dist,
+    .venv,
+    venv,
+    tests/*,
+    examples/*
+
+# Ignore some common errors
 ignore = 
-    E203,  # whitespace before ':' (black compatibility)
+    E203,  # whitespace before ':' (Black compatibility)
     W503,  # line break before binary operator
-    F821   # undefined name
+    F401,  # module imported but unused
+    F811,  # redefinition of unused name
+
+# Specific error codes to enforce
+per-file-ignores = 
+    __init__.py:F401
+    */__init__.py:F401
+
+# Maximum complexity
+max-complexity = 15
+
+# Enable PyFlakes (F) and pycodestyle (E, W) checks
+select = E,W,F
+
+# Configure import sorting
+import-order-style = google
+application-import-names = automl,tests
