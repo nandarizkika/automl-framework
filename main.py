@@ -2,6 +2,7 @@
 Main script for the AutoML framework.
 Demonstrates usage of the framework.
 """
+
 import os
 import pandas as pd
 from sklearn.metrics import accuracy_score
