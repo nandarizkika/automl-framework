@@ -3,7 +3,6 @@
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PyPI version](https://img.shields.io/badge/pypi-v0.1.0-blue)](https://pypi.org/project/automl-framework/)
-[![Build Status](https://img.shields.io/github/actions/workflow/status/nandarizkika/automl-framework/ci.yml)](https://github.com/nandarizkika/automl-framework/actions)
 [![Coverage](https://img.shields.io/codecov/c/github/nandarizkika/automl-framework)](https://codecov.io/gh/nandarizkika/automl-framework)
 
 ## 🌟 Project Overview
