@@ -32,7 +32,7 @@ def example_with_synthetic_data():
     print(f"Target distribution:\n{y.value_counts(normalize=True)}")
 
     data_report = DataUtils.check_data_quality(X, y)
-    print(f"\nData quality report:")
+    print("\nData quality report:")
     for key, value in data_report.items():
         print(f"- {key}: {value}")
 
@@ -77,7 +77,7 @@ def example_with_synthetic_data():
             print(feature_imp.head())
 
     summary = automl.get_training_summary()
-    print(f"\nTraining Summary:")
+    print("\nTraining Summary:")
     print(f"- Models trained: {summary['n_models_trained']}")
     print(f"- Successful: {len(summary['successful_models'])}")
     print(f"- Failed: {len(summary['failed_models'])}")

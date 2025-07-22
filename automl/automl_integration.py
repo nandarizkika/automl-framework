@@ -219,7 +219,7 @@ class TuningIntegrator:
                 y_test_pred = model.predict(X_test)
 
                 if self.problem_type == "classification":
-                    from sklearn.metrics import accuracy_score, f1_score
+                    from sklearn.metrics import f1_score
 
                     train_score = f1_score(y_train, y_train_pred, average="weighted")
                     test_score = f1_score(y_test, y_test_pred, average="weighted")
@@ -247,7 +247,7 @@ class TuningIntegrator:
                 y_test_pred = model.predict(X_test)
 
                 if self.problem_type == "classification":
-                    from sklearn.metrics import accuracy_score, f1_score
+                    from sklearn.metrics import f1_score
 
                     train_score = f1_score(y_train, y_train_pred, average="weighted")
                     test_score = f1_score(y_test, y_test_pred, average="weighted")

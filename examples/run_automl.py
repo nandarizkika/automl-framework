@@ -68,7 +68,7 @@ def format_metric(metric):
     else:
         try:
             return f"{float(metric):.4f}"
-        except:
+        except Exception:
             return str(metric)
 
 
@@ -636,7 +636,7 @@ def run_automl(
         if hasattr(automl.pipeline, "get_mitigated_models"):
             try:
                 results["mitigated_models"] = automl.pipeline.get_mitigated_models()
-            except:
+            except Exception:
                 results["mitigated_models"] = {}
 
     return results

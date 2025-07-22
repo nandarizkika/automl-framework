@@ -25,6 +25,10 @@ Optional (for advanced features):
     - hyperopt (for advanced hyperparameter tuning)
 """
 
+from automl import AutoML
+from automl.utils import DataUtils, setup_logging
+from automl.preprocessors import Preprocessor, StandardPreprocessor
+
 import os
 import sys
 import warnings
@@ -45,9 +49,6 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import classification_report, confusion_matrix
 
 sys.path.append("../")
-from automl import AutoML
-from automl.utils import DataUtils, setup_logging
-from automl.preprocessors import Preprocessor, StandardPreprocessor
 
 try:
     from automl.automl_integration import TuningIntegrator
@@ -240,7 +241,7 @@ def overfitting_detection_demo(automl, X, y):
     print(f"Evaluation completed in {evaluation_time:.2f} seconds")
 
     summary = automl.get_training_summary()
-    print(f"\nTraining Summary:")
+    print("\nTraining Summary:")
     print(f"  Models trained: {summary['n_models_trained']}")
     print(f"  Successful models: {len(summary['successful_models'])}")
     print(f"  Failed models: {len(summary['failed_models'])}")
@@ -272,7 +273,7 @@ def overfitting_detection_demo(automl, X, y):
 
             if overfitting_score > 0.2:
                 overfitting_detected.append(model_name)
-                print(f"  ⚠️  Overfitting detected!")
+                print("  ⚠️  Overfitting detected!")
 
                 suggestions = automl.get_improvement_suggestions(model_name)
                 if suggestions:
@@ -343,7 +344,7 @@ def hyperparameter_tuning_demo(automl, X_train, y_train):
             print(summary[["model", "best_score", "tuning_time", "status"]])
 
         best_models = tuner.get_best_models(top_n=3)
-        print(f"\nTop 3 tuned models:")
+        print("\nTop 3 tuned models:")
         for i, model_info in enumerate(best_models, 1):
             print(f"{i}. {model_info['model_name']}: {model_info['best_score']:.4f}")
             print(f"   Strategy: {model_info['search_type']}")
@@ -410,7 +411,7 @@ def comprehensive_model_analysis(automl, X_test, y_test):
                 print("\nTop 10 most important features:")
                 print(importance_df.head(10))
 
-                print(f"\nFeature Importance Statistics:")
+                print("\nFeature Importance Statistics:")
                 print(f"  Mean importance: {importances.mean():.4f}")
                 print(f"  Std importance: {importances.std():.4f}")
                 print(f"  Top feature contributes: {importances.max():.2%}")
@@ -439,14 +440,14 @@ def comprehensive_model_analysis(automl, X_test, y_test):
         print(classification_report(y_test, predictions))
 
         cm = confusion_matrix(y_test, predictions)
-        print(f"\nConfusion Matrix:")
+        print("\nConfusion Matrix:")
         print(cm)
 
         try:
             probabilities = automl.predict_proba(X_test)
             confidence_scores = np.max(probabilities, axis=1)
 
-            print(f"\nPrediction Confidence Analysis:")
+            print("\nPrediction Confidence Analysis:")
             print(f"  Mean confidence: {confidence_scores.mean():.4f}")
             print(f"  Min confidence: {confidence_scores.min():.4f}")
             print(f"  Max confidence: {confidence_scores.max():.4f}")
@@ -657,9 +658,9 @@ def production_deployment_preparation(automl, output_dir="production_models"):
             f.write(deployment_readme)
         print(f"✓ Deployment README created: {readme_path}")
 
-        print(f"\n🚀 Production deployment package ready!")
+        print("\n🚀 Production deployment package ready!")
         print(f"   Location: {os.path.abspath(output_dir)}")
-        print(f"   Files created: 6")
+        print("   Files created: 6")
 
     except Exception as e:
         print(f"Error preparing production deployment: {e}")

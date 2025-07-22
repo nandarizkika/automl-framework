@@ -12,9 +12,6 @@ from typing import Dict, Optional, Any, List, Tuple
 from datetime import datetime
 import numpy as np
 
-from sklearn.base import BaseEstimator, clone
-from overfitting_handler import OverfittingHandler
-
 from sklearn.ensemble import (
     RandomForestClassifier,
     GradientBoostingClassifier,

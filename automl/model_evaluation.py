@@ -7,15 +7,6 @@ with focus on precision, recall, and test set performance.
 import numpy as np
 import pandas as pd
 from typing import Dict, Any, Tuple, List, Optional
-from sklearn.metrics import (
-    accuracy_score,
-    f1_score,
-    precision_score,
-    recall_score,
-    mean_squared_error,
-    mean_absolute_error,
-    r2_score,
-)
 import logging
 
 logger = logging.getLogger("AutoML")
