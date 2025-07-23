@@ -16,14 +16,14 @@ Welcome to the comprehensive documentation for the AutoML Framework! This docume
 - [Model Comparison](tutorials/model_comparison.md) - Compare and evaluate models
 
 ### 🔧 **API Reference**
-- [AutoML Class](api/automl.md) - Main interface documentation
-- [Pipeline](api/pipeline.md) - Core pipeline functionality
-- [Overfitting Handler](api/overfitting.md) - Overfitting detection and mitigation
-- [Hyperparameter Tuning](api/hyperparameter_tuning.md) - Optimization strategies
-- [Model Wrapper](api/model_wrapper.md) - Model interface
-- [Preprocessors](api/preprocessors.md) - Data preprocessing
-- [Utilities](api/utils.md) - Helper functions
-- [Metrics](api/metrics.md) - Performance metrics
+- [AutoML Class](API/automl.md) - Main interface documentation
+- [Pipeline](API/pipeline.md) - Core pipeline functionality
+- [Overfitting Handler](API/overfitting.md) - Overfitting detection and mitigation
+- [Hyperparameter Tuning](API/hyperparameter_tuning.md) - Optimization strategies
+- [Model Wrapper](API/model_wrapper.md) - Model interface
+- [Preprocessors](API/preprocessors.md) - Data preprocessing
+- [Utilities](API/utils.md) - Helper functions
+- [Metrics](API/metrics.md) - Performance metrics
 
 ### 💡 **Examples**
 - [Basic Usage](examples/basic_usage.md) - Simple examples to get started
